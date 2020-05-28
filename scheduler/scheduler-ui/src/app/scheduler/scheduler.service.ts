@@ -22,6 +22,8 @@ export class SchedulerService{
     startJobNowUrl = "http://localhost:7080/scheduler/start";
     AvailableJobs = 'http://localhost:7080/scheduler/getAvailableJobs';
     logsUrl = 'http://localhost:7080/scheduler/getLogs';
+    addHttpJobUrl = 'http://localhost:7080/scheduler/addHttpJob';
+    postClassJobUrl = 'http://localhost:7080/scheduler/addClassJob';
 
     constructor(private _http: HttpClient) {
     }
@@ -119,5 +121,16 @@ export class SchedulerService{
 getLogs():Observable<Logs>{
       return this._http.get<Logs>(this.logsUrl);
 }
+
+ postHttpJob(httpJob):Observable<Job>{
+
+
+      return this._http.post<Job>(this.addHttpJobUrl,httpJob)
+ }
+
+
+ postClassJob(classJob):Observable<Job>{
+   return this._http.post<Job>(this.postClassJobUrl,classJob)
+ }
 
 }

@@ -8,6 +8,7 @@
         <th><mat-radio-button  [value] =true   checked >NORMAL JOB</mat-radio-button></th>
     </mat-radio-group>
 </tr></table></div>
+  <p><strong>Click Here To Add A Job :</strong><button mat-button color="primary" (click)="openDialog()">Add Job</button></p>
 
         <form [formGroup]="schedulerForm"  (ngSubmit)="onSubmit()" novalidate autocomplete="off">
 

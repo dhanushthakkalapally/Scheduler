@@ -17,12 +17,17 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { LogtableComponent } from './logtable/logtable.component';
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from '@angular/material/divider';
+import {MatDialogModule} from "@angular/material/dialog";
+import { NewJobComponent } from './new-job/new-job.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
     AppComponent,
     SchedulerComponent,
     LogtableComponent,
+    NewJobComponent,
     // SchedulerDropdownComponent
 
   ],
@@ -40,8 +45,12 @@ import {MatDividerModule} from '@angular/material/divider';
     MatSnackBarModule,
     MatTableModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
+
   providers: [SchedulerService,ServerResponseCode,MatRadioModule],
   bootstrap: [AppComponent]
 })
