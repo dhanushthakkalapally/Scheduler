@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import {HttpClient,HttpHeaders,HttpParams } from '@angular/common/http'
 import {map,tap}                             from 'rxjs/operators'
-import {GetJobs,Job,AvailableJobs,Logs}                        from './respose.interfaces'
+import {GetJobs, Job, AvailableJobs, Logs, ConfiguredJobs} from './respose.interfaces'
 import {Observable}                         from 'rxjs'
 
 
@@ -24,6 +24,27 @@ export class SchedulerService{
     logsUrl = 'http://localhost:7080/scheduler/getLogs';
     addHttpJobUrl = 'http://localhost:7080/scheduler/addHttpJob';
     postClassJobUrl = 'http://localhost:7080/scheduler/addClassJob';
+    configuredJobsUrl ='http://localhost:7080/scheduler/getConfiguredJobs';
+    deleteConfiguredJobUrl = "http://localhost:7080/scheduler/deleteConfiguredJob"
+
+  //
+  //
+  // getJobsUrl = "http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/jobs";
+  // scheduleJobUrl = "http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/schedule";
+  // pauseJobUrl = "http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/pause";
+  // resumeJobUrl = "http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/resume";
+  // deleteJobUrl = "http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/delete";
+  // updateJobUrl = "http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/update";
+  // isJobWithNamePresentUrl = "http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/checkJobName";
+  // stopJobUrl = "http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/stop";
+  // startJobNowUrl = "http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/start";
+  // AvailableJobs = 'http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/getAvailableJobs';
+  // logsUrl = 'http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/getLogs';
+  // addHttpJobUrl = 'http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/addHttpJob';
+  // postClassJobUrl = 'http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/addClassJob';
+  // configuredJobsUrl ='http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/getConfiguredJobs';
+  // deleteConfiguredJobUrl = "http://ec2-54-87-160-152.compute-1.amazonaws.com:7080/scheduler/deleteConfiguredJob"
+
 
     constructor(private _http: HttpClient) {
     }
@@ -133,4 +154,14 @@ getLogs():Observable<Logs>{
    return this._http.post<Job>(this.postClassJobUrl,classJob)
  }
 
+
+ getConfiguredJobs():Observable<ConfiguredJobs>{
+      return this._http.get<ConfiguredJobs>(this.configuredJobsUrl);
+ }
+
+ deleteConfiguredJob(jobName):Observable<ConfiguredJobs>{
+      let params = new HttpParams().append('jobName',jobName)
+
+      return this._http.delete<ConfiguredJobs>(this.deleteConfiguredJobUrl,{params:params})
+ }
 }

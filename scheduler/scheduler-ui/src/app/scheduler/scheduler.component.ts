@@ -31,6 +31,8 @@ date : Date ;
 // timer subscriptions to get the jobs
 jobRefreshTimerSubscription: Subscription;
 
+jobsTimerSubscription:Subscription;
+
 // getJobsTimerSubsciption : Subscription;
 // job records all the jobs will be assigned to this
 jobRecords = [];
@@ -46,7 +48,7 @@ jobType:boolean=true;
     private _schedulerService:SchedulerService,
     private _responseCode : ServerResponseCode,
     private  _matSnackBar:MatSnackBar,
-              public dialog: MatDialog) {
+              ) {
 
    this.jobNameStatus='';
 
@@ -69,37 +71,32 @@ jobType:boolean=true;
     });
     this.setDate();
     this.getAvailableJobs();
-    let timer_value =timer(2000,3000);
-
+    let timer_value =timer(0,3000);
+     let timer2 = timer(0,10*1000);
     this.jobRefreshTimerSubscription = timer_value.subscribe(t=>{
       this.getJobs();
 
     });
 
-    setInterval(()=>{
+
+    this.jobsTimerSubscription= timer2.subscribe(t=>{
       if(this.isNotPause){
-      this.getAvailableJobs()
+        this.getAvailableJobs()
       }
-    },10*1000);
+    })
+    // setInterval(()=>{
+    //
+    // },10*1000);
   }
 
 
   ngOnDestroy() {
     this.jobRefreshTimerSubscription.unsubscribe();
+    this.jobsTimerSubscription.unsubscribe();
   }
 
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(NewJobComponent, {
-     width:'675px'
 
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-     this.getAvailableJobs();
-
-    });
-  }
 
 /***Gets all the schduled jobs  */
   getJobs(){

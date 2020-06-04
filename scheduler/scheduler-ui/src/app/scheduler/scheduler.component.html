@@ -1,6 +1,6 @@
-<nav class="navbar navbar-dark bg-dark">
-    <span style="margin-top: 0;font-size: 38px;" class="navbar-brand mb-0 h1">FHIR Scheduler</span>
-</nav>
+<!--<nav class="navbar navbar-dark bg-dark">-->
+<!--    <span style="margin-top: 0;font-size: 38px;" class="navbar-brand mb-0 h1">FHIR Scheduler</span>-->
+<!--</nav>-->
 <div style="margin:20px">
 <div style="margin-bottom: 20px;">
   <table><tr><th><label for='typeOfJob'>Please Select Type of job : </label></th> <mat-radio-group   [(ngModel)]='jobType'  (change)='resetCron()' color = 'primary'  labelPosition = 'after'  #radio='ngModel'>
@@ -8,7 +8,6 @@
         <th><mat-radio-button  [value] =true   checked >NORMAL JOB</mat-radio-button></th>
     </mat-radio-group>
 </tr></table></div>
-  <p><strong>Click Here To Add A Job :</strong><button mat-button color="primary" (click)="openDialog()">Add Job</button></p>
 
         <form [formGroup]="schedulerForm"  (ngSubmit)="onSubmit()" novalidate autocomplete="off">
 
@@ -134,13 +133,13 @@
                 <!-- Used only in case of Adding New Job -->
                 <button
                   [disabled]="(schedulerForm.get('cronExpression').status =='INVALID')||(schedulerForm.get('jobName').status =='INVALID')"
-                     class="btn btn-primary"
+                  mat-raised-button color="primary"
                     (click)="scheduleJob()"
                      *ngIf="!isEditMode && radio.value"
                     value="Submit">Submit</button>
 
               <button
-                class="btn btn-primary"
+                mat-raised-button color="primary"
                 [disabled]="(schedulerForm.get('year').status =='INVALID')||(schedulerForm.get('jobName').status =='INVALID')||(schedulerForm.get('month').status =='INVALID')||(schedulerForm.get('hour').status =='INVALID')||(schedulerForm.get('minute').status =='INVALID')||(schedulerForm.get('day').status =='INVALID')"
                 (click)="scheduleJob()"
                 *ngIf="!isEditMode && !radio.value"
@@ -149,14 +148,14 @@
 
                 <!-- Used only in case of Edit Job -->
                 <button
-                     class="btn btn-primary"
+                  mat-raised-button color="primary"
                     (click)="updateJob()"
                     *ngIf="isEditMode"
                         value="Update">Update</button>
 
                 <button
                   style="margin-left: 10px;"
-                    class="btn btn-primary"
+                  mat-raised-button color="primary"
                     (click)="cancelEdit()"
                     *ngIf="isEditMode"
                   value="Cancel">Cancel</button>
@@ -198,29 +197,29 @@
                     <td>{{jobRec.lastFiredTime | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
                     <td>{{jobRec.nextFireTime | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
                     <td>
-                        <button class="btn btn-primary"
+                        <button  mat-raised-button color="primary"
                             [disabled]="jobRec.jobStatus == 'RUNNING' || jobRec.jobStatus == 'STOP INITIATED' "
                             (click)='startJobNow(jobRec.jobName)'>Start Job Now</button> |
 
-                        <button class="btn btn-primary"
+                        <button mat-raised-button color="primary"
                             [disabled]="jobRec.jobStatus != 'SCHEDULED'"
                             (click)='pauseJob(jobRec.jobName)'>Pause Job</button> |
 
-                        <button class="btn btn-primary"
+                        <button mat-raised-button color="primary"
                             [disabled]="jobRec.jobStatus != 'PAUSED'"
                             (click)='resumeJob(jobRec.jobName)'>Resume Job</button> |
 
-                        <button class="btn btn-primary"
+                        <button mat-raised-button color="primary"
                             [disabled]="jobRec.jobStatus == 'RUNNING' || jobRec.jobStatus == 'STOP INITIATED' "
 
                             (click)='deleteJob(jobRec.jobName)'>Delete Job</button> |
 
-                        <button class="btn btn-primary"
+                        <button mat-raised-button color="primary"
                             [disabled]="jobRec.jobStatus != 'RUNNING' || jobRec.jobStatus == 'STOP INITIATED'"
 
                             (click)='stopJob(jobRec.jobName)'>Stop Job</button> |
 
-                        <button class="btn btn-primary"
+                        <button mat-raised-button color="primary"
                             [disabled]="jobRec.jobStatus == 'RUNNING' || jobRec.jobStatus == 'STOP INITIATED' "
                             (click)='editJob(jobRec)'>Edit Job</button>
                     </td>
@@ -231,7 +230,7 @@
     </table>
   <mat-divider class="mt-5 mb-5"></mat-divider>
 </div>
-  <h4>History :</h4>    <logtable></logtable>
+
 </div>
 
 

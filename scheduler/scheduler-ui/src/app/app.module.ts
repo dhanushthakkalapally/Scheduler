@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http'
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
@@ -21,6 +20,18 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { NewJobComponent } from './new-job/new-job.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {Routes,RouterModule} from "@angular/router";
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { ConfigureJobComponent } from './configure-job/configure-job.component';
+import {MatIconModule} from '@angular/material/icon';
+
+
+const routes : Routes = [{path:'' ,component : SchedulerComponent },
+
+  {path:'history',component:LogtableComponent} ,
+
+  {path:'configureJob',component:ConfigureJobComponent}]
 
 @NgModule({
   declarations: [
@@ -28,6 +39,7 @@ import {MatInputModule} from "@angular/material/input";
     SchedulerComponent,
     LogtableComponent,
     NewJobComponent,
+    ConfigureJobComponent,
     // SchedulerDropdownComponent
 
   ],
@@ -48,7 +60,11 @@ import {MatInputModule} from "@angular/material/input";
     MatDividerModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    RouterModule.forRoot(routes),
+    MatTabsModule,
+    MatPaginatorModule,
+    MatIconModule
   ],
 
   providers: [SchedulerService,ServerResponseCode,MatRadioModule],

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.fhir.scheduler.entity.Available_jobs;
-import com.fhir.scheduler.repo.Jobs_repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -350,6 +349,18 @@ public class JobController {
 		}else {
 			return getServerResponse(ServerResponseCode.SUCCESS,true);
 		}
+	}
+
+
+	@GetMapping("getConfiguredJobs")
+	public ServerResponse getConfiguredJobs(){
+		return getServerResponse(ServerResponseCode.SUCCESS,jobService.getConfiguredJobs());
+	}
+
+	@DeleteMapping("deleteConfiguredJob")
+	public ServerResponse deleteConfiguredJob(@RequestParam("jobName") String jobName){
+		jobService.deleteConfiguredJob(jobName);
+		return getServerResponse(ServerResponseCode.SUCCESS,jobService.getConfiguredJobs());
 	}
 
 

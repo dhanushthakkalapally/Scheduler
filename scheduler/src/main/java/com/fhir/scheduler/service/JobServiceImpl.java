@@ -2,16 +2,12 @@ package com.fhir.scheduler.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import com.fhir.scheduler.entity.Available_jobs;
-import com.fhir.scheduler.entity.History;
 import com.fhir.scheduler.repo.History_repo;
 import com.fhir.scheduler.repo.Jobs_repo;
+import com.fhir.scheduler.entity.History;
 import org.quartz.*;
 import org.quartz.Trigger.TriggerState;
 import org.quartz.impl.matchers.GroupMatcher;
@@ -576,6 +572,18 @@ public class JobServiceImpl implements JobService {
             return true;
         }
 
+    }
+
+    @Override
+    public List<Available_jobs> getConfiguredJobs() {
+      return   this.jobs_repo.findAll();
+    }
+
+    @Override
+    public boolean deleteConfiguredJob(String jobName) {
+        this.jobs_repo.delete(jobName);
+
+        return true;
     }
 }
 

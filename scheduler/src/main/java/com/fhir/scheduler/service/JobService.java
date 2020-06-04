@@ -37,4 +37,8 @@ public interface JobService {
 	boolean addHttpJob(String jobName , String startUrl ,String stopUrl);
 
 	boolean addClassJob(String jobName , String startmethod , String stopmethod ,String classPath, String parameters );
+
+	List<Available_jobs> getConfiguredJobs();
+
+	boolean deleteConfiguredJob(String jobName);
 }

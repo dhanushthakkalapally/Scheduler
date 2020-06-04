@@ -44,13 +44,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.20</version>
 		</dependency>
-		<dependency>
-			<groupId>Pkb</groupId>
-			<artifactId>Pkb</artifactId>
-			<version>1.2</version>
-			<scope>system</scope>
-          <systemPath>C:/Users/prash/Important/Pkb_project/out/artifacts/Pkb_project_jar/Pkb_project.jar</systemPath>
-		</dependency>
+
 
 		<!-- Spting data jpa dependencies -->
 	    <dependency>
