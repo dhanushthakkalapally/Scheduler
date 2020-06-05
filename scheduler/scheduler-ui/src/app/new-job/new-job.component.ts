@@ -152,7 +152,6 @@ export class NewJobComponent implements OnInit {
       if (this.updateForm.controls['classGroup'].pristine) {
         this.message = true;
       }else if(!this.updateForm.controls['classGroup'].pristine){
-console.log("sanju");
         this.message = false ;
         let jobData  = this.updateForm.controls['classGroup'].value;
         jobData.jobName = this.updateForm.controls['classGroup'].get("jobName").value;
@@ -166,14 +165,14 @@ console.log("sanju");
             this.failureMessage = "ERROR : Failed To Update The Job ";
             this.updateFailure = true;
             this.updateSuccess = false;
-            console.log('error occurred')
+
           }
         }, error => {
           this.snackBar.open(error.statusText + " Occurred Unable to Update Jobs", "Okay", {duration: 2000});
           console.log();
         })
 
-   console.log("Hello Sanju");
+
       }
     }
 

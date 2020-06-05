@@ -10,42 +10,44 @@ import {Observable}                         from 'rxjs'
 @Injectable()
 // This is a singleton class used to provide the data for the ui from rest
 export class SchedulerService{
-    //
-    getJobsUrl = "http://localhost:7080/scheduler/jobs";
-    scheduleJobUrl = "http://localhost:7080/scheduler/schedule";
-    pauseJobUrl = "http://localhost:7080/scheduler/pause";
-    resumeJobUrl = "http://localhost:7080/scheduler/resume";
-    deleteJobUrl = "http://localhost:7080/scheduler/delete";
-    updateJobUrl = "http://localhost:7080/scheduler/update";
-    isJobWithNamePresentUrl = "http://localhost:7080/scheduler/checkJobName";
-    stopJobUrl = "http://localhost:7080/scheduler/stop";
-    startJobNowUrl = "http://localhost:7080/scheduler/start";
-    AvailableJobs = 'http://localhost:7080/scheduler/getAvailableJobs';
-    logsUrl = 'http://localhost:7080/scheduler/getLogs';
-    addHttpJobUrl = 'http://localhost:7080/scheduler/addHttpJob';
-    postClassJobUrl = 'http://localhost:7080/scheduler/addClassJob';
-    configuredJobsUrl ='http://localhost:7080/scheduler/getConfiguredJobs';
-    deleteConfiguredJobUrl = "http://localhost:7080/scheduler/deleteConfiguredJob";
-    updateHttpJobUrl = "http://localhost:7080/scheduler/updateHttpJob";
-    updateClassJobUrl = "http://localhost:7080/scheduler/updateClassJob";
+    // //
+    // getJobsUrl = "http://localhost:7080/scheduler/jobs";
+    // scheduleJobUrl = "http://localhost:7080/scheduler/schedule";
+    // pauseJobUrl = "http://localhost:7080/scheduler/pause";
+    // resumeJobUrl = "http://localhost:7080/scheduler/resume";
+    // deleteJobUrl = "http://localhost:7080/scheduler/delete";
+    // updateJobUrl = "http://localhost:7080/scheduler/update";
+    // isJobWithNamePresentUrl = "http://localhost:7080/scheduler/checkJobName";
+    // stopJobUrl = "http://localhost:7080/scheduler/stop";
+    // startJobNowUrl = "http://localhost:7080/scheduler/start";
+    // AvailableJobs = 'http://localhost:7080/scheduler/getAvailableJobs';
+    // logsUrl = 'http://localhost:7080/scheduler/getLogs';
+    // addHttpJobUrl = 'http://localhost:7080/scheduler/addHttpJob';
+    // postClassJobUrl = 'http://localhost:7080/scheduler/addClassJob';
+    // configuredJobsUrl ='http://localhost:7080/scheduler/getConfiguredJobs';
+    // deleteConfiguredJobUrl = "http://localhost:7080/scheduler/deleteConfiguredJob";
+    // updateHttpJobUrl = "http://localhost:7080/scheduler/updateHttpJob";
+    // updateClassJobUrl = "http://localhost:7080/scheduler/updateClassJob";
 
-  //
-  //
-  // getJobsUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/jobs";
-  // scheduleJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/schedule";
-  // pauseJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/pause";
-  // resumeJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/resume";
-  // deleteJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/delete";
-  // updateJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/update";
-  // isJobWithNamePresentUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/checkJobName";
-  // stopJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/stop";
-  // startJobNowUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/start";
-  // AvailableJobs = 'http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/getAvailableJobs';
-  // logsUrl = 'http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/getLogs';
-  // addHttpJobUrl = 'http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/addHttpJob';
-  // postClassJobUrl = 'http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/addClassJob';
-  // configuredJobsUrl ='http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/getConfiguredJobs';
-  // deleteConfiguredJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/deleteConfiguredJob"
+
+
+  getJobsUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/jobs";
+  scheduleJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/schedule";
+  pauseJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/pause";
+  resumeJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/resume";
+  deleteJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/delete";
+  updateJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/update";
+  isJobWithNamePresentUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/checkJobName";
+  stopJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/stop";
+  startJobNowUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/start";
+  AvailableJobs = 'http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/getAvailableJobs';
+  logsUrl = 'http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/getLogs';
+  addHttpJobUrl = 'http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/addHttpJob';
+  postClassJobUrl = 'http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/addClassJob';
+  configuredJobsUrl ='http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/getConfiguredJobs';
+  deleteConfiguredJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/deleteConfiguredJob"
+  updateHttpJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/updateHttpJob";
+  updateClassJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/updateClassJob";
 
 
     constructor(private _http: HttpClient) {

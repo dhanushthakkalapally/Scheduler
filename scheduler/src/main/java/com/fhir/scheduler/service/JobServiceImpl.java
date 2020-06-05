@@ -19,6 +19,8 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+
 
 @Service
 public class JobServiceImpl implements JobService {
@@ -590,16 +592,22 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public boolean updateHttpJob(String jobName, String startUrl, String stopUrl) {
+
         if (jobName != null){
-           Available_jobs job =  jobs_repo.getOne(jobName);
-            job.setParameters(null);
-            job.setStop_method(null);
-            job.setStart_method(null);
-            job.setStop_url(stopUrl);
-            job.setStart_url(startUrl);
-            job.setClass_path(null);
-            jobs_repo.save(job);
-        return true;
+            try {
+                Available_jobs job = jobs_repo.getOne(jobName);
+                job.setParameters(null);
+                job.setStop_method(null);
+                job.setStart_method(null);
+                job.setStop_url(stopUrl.trim());
+                job.setStart_url(startUrl.trim());
+                job.setClass_path(null);
+                jobs_repo.save(job);
+
+                return true;
+            }catch (EntityNotFoundException e){
+                return false;
+            }
         }
         return false;
     }
@@ -609,15 +617,19 @@ public class JobServiceImpl implements JobService {
 
 
         if (jobName != null){
-            Available_jobs job =  jobs_repo.getOne(jobName);
-            job.setParameters(parameters);
-            job.setStop_method(stopmethod);
-            job.setStart_method(startmethod);
-            job.setClass_path(classPath);
-            job.setStop_url(null);
-            job.setStart_url(null);
-            jobs_repo.save(job);
-            return true;
+            try {
+                Available_jobs job = jobs_repo.getOne(jobName);
+                job.setParameters(parameters);
+                job.setStop_method(stopmethod.trim());
+                job.setStart_method(startmethod.trim());
+                job.setClass_path(classPath.trim());
+                job.setStop_url(null);
+                job.setStart_url(null);
+                jobs_repo.save(job);
+                return true;
+            }catch (EntityNotFoundException e){
+                return false;
+            }
         }
 
 
