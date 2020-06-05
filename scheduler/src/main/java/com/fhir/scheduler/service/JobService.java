@@ -41,4 +41,8 @@ public interface JobService {
 	List<Available_jobs> getConfiguredJobs();
 
 	boolean deleteConfiguredJob(String jobName);
+
+	boolean updateHttpJob(String jobName , String startUrl ,String stopUrl);
+
+	boolean updateClassJob(String jobName , String startmethod , String stopmethod ,String classPath, String parameters);
 }

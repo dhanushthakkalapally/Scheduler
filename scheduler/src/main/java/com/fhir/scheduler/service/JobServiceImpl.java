@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fhir.scheduler.entity.Available_jobs;
 import com.fhir.scheduler.repo.History_repo;
 import com.fhir.scheduler.repo.Jobs_repo;
@@ -563,10 +564,10 @@ public class JobServiceImpl implements JobService {
         } else {
             Available_jobs job = new Available_jobs();
             job.setJob_name(jobName.trim().toUpperCase());
-           job.setClass_path(classPath.trim());
-           job.setStart_method(startmethod.trim());
-           job.setStop_method(stopmethod.trim());
-           job.setParameters(parameters.trim());
+            job.setClass_path(classPath.trim());
+            job.setStart_method(startmethod.trim());
+            job.setStop_method(stopmethod.trim());
+            job.setParameters(parameters.trim());
             job.setStatus(false);
             jobs_repo.save(job);
             return true;
@@ -576,7 +577,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public List<Available_jobs> getConfiguredJobs() {
-      return   this.jobs_repo.findAll();
+        return this.jobs_repo.findAll();
     }
 
     @Override
@@ -584,6 +585,43 @@ public class JobServiceImpl implements JobService {
         this.jobs_repo.delete(jobName);
 
         return true;
+    }
+
+
+    @Override
+    public boolean updateHttpJob(String jobName, String startUrl, String stopUrl) {
+        if (jobName != null){
+           Available_jobs job =  jobs_repo.getOne(jobName);
+            job.setParameters(null);
+            job.setStop_method(null);
+            job.setStart_method(null);
+            job.setStop_url(stopUrl);
+            job.setStart_url(startUrl);
+            job.setClass_path(null);
+            jobs_repo.save(job);
+        return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateClassJob(String jobName, String startmethod, String stopmethod, String classPath, String parameters) {
+
+
+        if (jobName != null){
+            Available_jobs job =  jobs_repo.getOne(jobName);
+            job.setParameters(parameters);
+            job.setStop_method(stopmethod);
+            job.setStart_method(startmethod);
+            job.setClass_path(classPath);
+            job.setStop_url(null);
+            job.setStart_url(null);
+            jobs_repo.save(job);
+            return true;
+        }
+
+
+        return false;
     }
 }
 
