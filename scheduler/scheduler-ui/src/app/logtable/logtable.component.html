@@ -3,7 +3,7 @@
           [ngStyle]="{'color':'#eaf3ff'}" class="bg-dark ">Refresh
   </button>
 </div>
-<table mat-table [dataSource]="logData" class="mat-elevation-z8">
+<table mat-table [dataSource]="logData">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -47,5 +47,8 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+
+  <chart  [dataset]="chartData" [tableData] = 'tableData' ></chart>
 
 
