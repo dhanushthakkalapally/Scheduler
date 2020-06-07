@@ -1,12 +1,12 @@
-<div class="d-flex flex-row">
-  <div *ngIf="status" style="width:50%">
-    <canvas baseChart (chartClick)="onClick($event)"
+<div class="d-flex flex-row ">
+  <div *ngIf="status" class="d-flex flex-row align-items-end" style="width:50% ; height:100%" >
+    <canvas baseChart    (chartClick)="onClick($event)"
             [datasets]="barChartData"
             [options]="barChartOptions"
             [labels]="barChartLabels"
             [legend]="barChartLegend"
             [chartType]="barChartType"
-            [colors]="['RGB(53, 58, 64)']">
+            [colors]=" _lineChartColors">
     </canvas>
   </div>
   <div style="width:50%; margin-top: 5px">
@@ -35,4 +35,6 @@
     </table>
     <mat-paginator [pageSizeOptions]="[7]" showFirstLastButtons></mat-paginator>
   </div>
+
 </div>
+

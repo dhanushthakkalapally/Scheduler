@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ChartOptions, ChartType, ChartDataSets} from 'chart.js';
-import {Label} from 'ng2-charts';
+import {Color, Label} from 'ng2-charts';
 import {LogDetails} from "../scheduler/respose.interfaces";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
@@ -20,13 +20,18 @@ export class ChartComponent implements OnInit, OnChanges {
 
   dataSource = new MatTableDataSource<{ jobName: String, information: String, startTime: Date }>();
 
+
+
   public barChartLabels: Label[] = ['Success', 'Failed', 'Interrupted'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = false;
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
-    scales: {xAxes: [{}], yAxes: [{}]},
+    scales: {xAxes: [{}], yAxes: [{ticks: {
+
+          min : 0,
+        }}]},
     plugins: {
       datalabels: {
         anchor: 'end',
@@ -34,6 +39,17 @@ export class ChartComponent implements OnInit, OnChanges {
       }
     }
   };
+
+   _lineChartColors:Array<any> = [{
+    backgroundColor: ['#28a745','#dc3545','#ffc107'],
+    borderColor: 'blue',
+    pointBackgroundColor: 'black',
+    pointBorderColor: 'black',
+    pointHoverBackgroundColor: 'red',
+    pointHoverBorderColor: 'red'
+  },
+];
+
 
   public barChartData: ChartDataSets[];
 
@@ -75,7 +91,7 @@ export class ChartComponent implements OnInit, OnChanges {
 
 
   onClick(event) {
-    console.log(event)
+    // console.log(event)
     if (event.active.length != 0) {
       if (event.active[0]._index == 0) {
         this.dataSource.data = this.getData("Success")
