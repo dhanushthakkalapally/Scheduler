@@ -14,7 +14,7 @@ import {MatSort} from "@angular/material/sort";
   styleUrls: ['./logtable.component.css']
 })
 export class LogtableComponent implements OnInit {
-  displayedColumns: String [] = ["id", "job_name", "status", "information", "job_start_time", "job_complete_time"]
+  displayedColumns: String [] = ["job_name", "status", "information", "job_start_time", "job_complete_time"]
   logData = new MatTableDataSource<LogDetails>();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   tableData: LogDetails[];

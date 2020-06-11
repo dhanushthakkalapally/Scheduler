@@ -551,7 +551,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public List<History> getLog() {
-        return history_repo.findAll();
+        return history_repo.getAll();
     }
 
 
