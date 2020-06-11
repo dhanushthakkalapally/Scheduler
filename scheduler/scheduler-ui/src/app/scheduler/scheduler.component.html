@@ -240,7 +240,7 @@
             |
 
             <button mat-raised-button color="primary"
-                    [disabled]="jobRec.jobStatus != 'RUNNING' || jobRec.jobStatus == 'STOP INITIATED'"
+                    [disabled]="jobRec.jobStatus != 'RUNNING' || !jobRec.Stop || jobRec.jobStatus == 'STOP INITIATED'"
 
                     (click)='stopJob(jobRec.jobName)'>Stop Job
             </button>

@@ -1,9 +1,12 @@
 package com.fhir.scheduler.service;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.TimeZone;
 
 import com.fhir.scheduler.config.PersistableCronTriggerFactoryBean;
+import org.joda.time.DateTime;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
@@ -59,6 +62,7 @@ class JobUtil {
 	protected static Trigger createCronTrigger(String triggerName, Date startTime, String cronExpression, int misFireInstruction){
 		PersistableCronTriggerFactoryBean factoryBean = new PersistableCronTriggerFactoryBean();
 	    factoryBean.setName(triggerName);
+	    factoryBean.setTimeZone(TimeZone.getTimeZone("Europe/London"));
 	    factoryBean.setStartTime(startTime);
 	    factoryBean.setCronExpression(cronExpression);
 	    factoryBean.setMisfireInstruction(misFireInstruction);

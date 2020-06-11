@@ -10,7 +10,7 @@ import {Observable}                         from 'rxjs'
 @Injectable()
 // This is a singleton class used to provide the data for the ui from rest
 export class SchedulerService{
-    // //
+
     // getJobsUrl = "http://localhost:7080/scheduler/jobs";
     // scheduleJobUrl = "http://localhost:7080/scheduler/schedule";
     // pauseJobUrl = "http://localhost:7080/scheduler/pause";
