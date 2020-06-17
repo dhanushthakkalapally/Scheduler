@@ -32,12 +32,14 @@ import { MessageComponent } from './message/message.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatSort, MatSortModule} from "@angular/material/sort";
+import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 const routes : Routes = [{path:'' ,component : SchedulerComponent },
 
   {path:'history',component:LogtableComponent} ,
 
-  {path:'configureJob',component:ConfigureJobComponent}]
+  {path:'configureJob',component:ConfigureJobComponent},
+  {path:"login",component:AuthenticateComponent}]
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ const routes : Routes = [{path:'' ,component : SchedulerComponent },
     ConfigureJobComponent,
     ChartComponent,
     MessageComponent,
+    AuthenticateComponent,
     // SchedulerDropdownComponent
 
   ],

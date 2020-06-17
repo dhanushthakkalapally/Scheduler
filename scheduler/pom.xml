@@ -36,9 +36,7 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- PostgreSQL driver dependency -->
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -80,7 +78,22 @@
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-context-support</artifactId>
 		</dependency>
-	
+<!--		Used for spring security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+<!--		Used for the generating JWT token -->
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>javax.activation-api</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
 	    <!-- Joda time is a utility to manage data/time in java-->
 	    <dependency>
 	        <groupId>joda-time</groupId>

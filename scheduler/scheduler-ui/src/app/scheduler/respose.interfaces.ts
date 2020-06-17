@@ -13,6 +13,10 @@ export interface GetJobs{
     }]
 }
 
+export interface Token {
+  jwtToken:String;
+}
+
 
 // interface for startjob response
 export interface Job{
