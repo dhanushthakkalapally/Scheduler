@@ -2,11 +2,11 @@
 
 export class User {
 
-  private jwtToken: String;
+  private jwtToken: string;
   private userDetails: { sub: string, exp: number, iat: number };
 
 
-  constructor(jwtToken: String) {
+  constructor(jwtToken: string) {
     this.jwtToken = jwtToken;
     this.userDetails = this.parseJwt(jwtToken);
   }
@@ -21,14 +21,32 @@ export class User {
     return JSON.parse(jsonPayload);
   };
 
-  get token():String{
-  //  check if the token is valid if valid send the token else return null
+  get token(): string {
+    //  check if the token is valid if valid send the token else return null
 
-    if(this.userDetails.exp == null || new Date()>new Date(this.userDetails.exp*10000)){
-      return null ;
+    if (this.userDetails.exp == null || new Date() > new Date(this.userDetails.exp * 1000)) {
+
+      return null;
+
     }
 
-    return  this.jwtToken;
+    return this.jwtToken;
   }
+
+  get expiry(): number {
+    if (this.userDetails.exp == null || new Date() > new Date(this.userDetails.exp * 1000)) {
+
+      return null;
+    } else {
+      return (new Date(this.userDetails.exp * 1000).getTime() - new Date().getTime())
+    }
+
+  }
+
+  get userName():string{
+  return   this.userDetails.sub;
+}
+
+
 
 }

@@ -38,15 +38,14 @@ public class JwtFilter extends OncePerRequestFilter {
         String username = null;
         String jwtToken = null;
 
-        String authorizationHeader = httpServletRequest.getHeader("Authorization");
-
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            jwtToken = authorizationHeader.substring(7);
+        String authorizationHeader = httpServletRequest.getParameter("Authorization");
+        if (authorizationHeader != null ) {
+            jwtToken = authorizationHeader;
 //            get the jwtToken from the header using the jwtUtil Service
             username = jwtUtil.extractUsername(jwtToken);
         }
         if (username!=null  && SecurityContextHolder.getContext().getAuthentication() == null){
-
+//            System.out.println(authorizationHeader);
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             if(jwtUtil.validateToken(jwtToken,userDetails)){
 //                If the token is valid and the pricipal is not already present in the session then authenticate and place the user for the request processing time

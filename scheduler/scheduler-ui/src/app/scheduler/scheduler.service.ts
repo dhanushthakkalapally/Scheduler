@@ -2,7 +2,10 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http'
 import {catchError, map, tap, take} from 'rxjs/operators'
 import {GetJobs, Job, AvailableJobs, Logs, ConfiguredJobs, Token} from './respose.interfaces'
-import {Observable, throwError} from 'rxjs'
+import {Observable, throwError, Subject, BehaviorSubject} from 'rxjs'
+import {User} from "../authenticate/authenticate.model";
+import {Router} from "@angular/router";
+
 
 @Injectable({providedIn: "root"})
 // This is a singleton class used to provide the data for the ui from rest
@@ -46,8 +49,11 @@ export class SchedulerService {
   // updateHttpJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/updateHttpJob";
   // updateClassJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/updateClassJob";
 
+  user: BehaviorSubject<User>;
 
-  constructor(private _http: HttpClient) {
+
+  constructor(private _http: HttpClient,private _router : Router) {
+    this.user = new BehaviorSubject<User>(null);
   }
 
   isJobWithNamePresent(jobName): Observable<Job> {
@@ -62,6 +68,7 @@ export class SchedulerService {
 
 
   getJobs(): Observable<GetJobs> {
+
     return this._http.get<GetJobs>(this.getJobsUrl);
   }
 
@@ -129,7 +136,7 @@ export class SchedulerService {
 
 
   getAvailableJobs(): Observable<AvailableJobs> {
-    return this._http.get<AvailableJobs>(this.AvailableJobs, {observe: 'response'}).pipe(tap(Response => console.log(Response)), map(response => response.body));
+    return this._http.get<AvailableJobs>(this.AvailableJobs, {observe: 'response'}).pipe(map(response => response.body));
 
   }
 
@@ -172,13 +179,34 @@ export class SchedulerService {
     return this._http.post<Token>(this.authenticateUrl, credetials).pipe(catchError(error => {
       if (error) {
         if (error.error.message == "Access Denied")
-          return throwError("Please Enter Valid User Details ");
+          return throwError("Please Enter Valid Details ");
       }
-    }),tap(response=>{
-    //  Using tap operator when a response comes if it is valid then we need to push to emit a subject and let all of the subscribe ones will know about it
+    }), tap(response => {
+      //  Using tap operator when a response comes if it is valid then we need to push to emit a subject and let all of the subscribe ones will know about it
+      const curr_user = new User(response.jwtToken);
+      this.user.next(curr_user);
+
+      localStorage.setItem('userData', curr_user.token);
     }));
+  }
 
+  autoLogin() {
 
+    //if the userdata exists in cache and it is not expired then automatically login
+    if (localStorage.getItem('userData')) {
+      const user = new User(localStorage.getItem('userData'));
+
+      if (user.token) {
+        console.log(user);
+        this.user.next(user);
+      } else {
+
+        this._router.navigate(['/login']);
+      }
+
+    }else{
+      this._router.navigate(['/login'])
+    }
   }
 
 

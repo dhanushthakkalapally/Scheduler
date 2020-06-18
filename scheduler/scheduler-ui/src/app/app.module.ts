@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
@@ -34,7 +34,9 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatSort, MatSortModule} from "@angular/material/sort";
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 
-const routes : Routes = [{path:'' ,component : SchedulerComponent },
+import {interceptor} from "./authenticate/authenticate.interceptor";
+
+const routes : Routes = [{path:'schedule' ,component : SchedulerComponent },
 
   {path:'history',component:LogtableComponent} ,
 
@@ -83,7 +85,7 @@ const routes : Routes = [{path:'' ,component : SchedulerComponent },
     MatSortModule
   ],
 
-  providers: [SchedulerService,ServerResponseCode,MatRadioModule],
+  providers: [SchedulerService,ServerResponseCode,MatRadioModule,{provide:HTTP_INTERCEPTORS,useClass:interceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

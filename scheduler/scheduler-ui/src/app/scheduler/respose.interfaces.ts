@@ -14,7 +14,7 @@ export interface GetJobs{
 }
 
 export interface Token {
-  jwtToken:String;
+  jwtToken:string;
 }
 
 
