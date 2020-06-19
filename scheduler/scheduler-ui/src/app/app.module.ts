@@ -35,13 +35,14 @@ import {MatSort, MatSortModule} from "@angular/material/sort";
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 import {interceptor} from "./authenticate/authenticate.interceptor";
+import {LoginGuard} from "./authenticate/authenticate.guard";
 
-const routes : Routes = [{path:'schedule' ,component : SchedulerComponent },
+const routes : Routes = [{path:'',redirectTo:'/schedule',pathMatch:'full'},{path:'schedule' ,component : SchedulerComponent },
 
   {path:'history',component:LogtableComponent} ,
 
   {path:'configureJob',component:ConfigureJobComponent},
-  {path:"login",component:AuthenticateComponent}]
+  {path:"login",component:AuthenticateComponent,canActivate:[LoginGuard]}]
 
 @NgModule({
   declarations: [

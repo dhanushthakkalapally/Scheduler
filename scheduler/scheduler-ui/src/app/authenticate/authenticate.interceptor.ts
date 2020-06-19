@@ -22,7 +22,7 @@ export class interceptor implements HttpInterceptor {
     });
     if (this.user) {
       // console.log(this.user);
-      const modifiedreq = req.clone({params: new HttpParams().append("Authorization", this.user.token)});
+      const modifiedreq = req.clone({params: req.params.set("Authorization", this.user.token)});
 
       return next.handle(modifiedreq);
     } else {
