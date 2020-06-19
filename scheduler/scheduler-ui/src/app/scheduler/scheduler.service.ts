@@ -10,49 +10,29 @@ import {Router} from "@angular/router";
 @Injectable({providedIn: "root"})
 // This is a singleton class used to provide the data for the ui from rest
 export class SchedulerService {
-  authenticateUrl = "http://localhost:7080/scheduler/authenticate"
-  getJobsUrl = "http://localhost:7080/scheduler/jobs";
-  scheduleJobUrl = "http://localhost:7080/scheduler/schedule";
-  pauseJobUrl = "http://localhost:7080/scheduler/pause";
-  resumeJobUrl = "http://localhost:7080/scheduler/resume";
-  deleteJobUrl = "http://localhost:7080/scheduler/delete";
-  updateJobUrl = "http://localhost:7080/scheduler/update";
-  isJobWithNamePresentUrl = "http://localhost:7080/scheduler/checkJobName";
-  stopJobUrl = "http://localhost:7080/scheduler/stop";
-  startJobNowUrl = "http://localhost:7080/scheduler/start";
-  AvailableJobs = 'http://localhost:7080/scheduler/getAvailableJobs';
-  logsUrl = 'http://localhost:7080/scheduler/getLogs';
-  addHttpJobUrl = 'http://localhost:7080/scheduler/addHttpJob';
-  postClassJobUrl = 'http://localhost:7080/scheduler/addClassJob';
-  configuredJobsUrl = 'http://localhost:7080/scheduler/getConfiguredJobs';
-  deleteConfiguredJobUrl = "http://localhost:7080/scheduler/deleteConfiguredJob";
-  updateHttpJobUrl = "http://localhost:7080/scheduler/updateHttpJob";
-  updateClassJobUrl = "http://localhost:7080/scheduler/updateClassJob";
-
-
-  //
-  // getJobsUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/jobs";
-  // scheduleJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/schedule";
-  // pauseJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/pause";
-  // resumeJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/resume";
-  // deleteJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/delete";
-  // updateJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/update";
-  // isJobWithNamePresentUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/checkJobName";
-  // stopJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/stop";
-  // startJobNowUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/start";
-  // AvailableJobs = 'http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/getAvailableJobs';
-  // logsUrl = 'http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/getLogs';
-  // addHttpJobUrl = 'http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/addHttpJob';
-  // postClassJobUrl = 'http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/addClassJob';
-  // configuredJobsUrl ='http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/getConfiguredJobs';
-  // deleteConfiguredJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/deleteConfiguredJob"
-  // updateHttpJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/updateHttpJob";
-  // updateClassJobUrl = "http://ec2-34-201-165-44.compute-1.amazonaws.com:7080/scheduler/updateClassJob";
+  authenticateUrl = "authenticate"
+  getJobsUrl = "jobs";
+  scheduleJobUrl = "schedule";
+  pauseJobUrl = "pause";
+  resumeJobUrl = "resume";
+  deleteJobUrl = "delete";
+  updateJobUrl = "update";
+  isJobWithNamePresentUrl = "checkJobName";
+  stopJobUrl = "stop";
+  startJobNowUrl = "start";
+  AvailableJobs = 'getAvailableJobs';
+  logsUrl = 'getLogs';
+  addHttpJobUrl = 'addHttpJob';
+  postClassJobUrl = 'addClassJob';
+  configuredJobsUrl = 'getConfiguredJobs';
+  deleteConfiguredJobUrl = "deleteConfiguredJob";
+  updateHttpJobUrl = "updateHttpJob";
+  updateClassJobUrl = "updateClassJob";
 
   user: BehaviorSubject<User>;
 
 
-  constructor(private _http: HttpClient,private _router : Router) {
+  constructor(private _http: HttpClient, private _router: Router) {
     this.user = new BehaviorSubject<User>(null);
   }
 
@@ -204,7 +184,7 @@ export class SchedulerService {
         this._router.navigate(['/login']);
       }
 
-    }else{
+    } else {
       this._router.navigate(['/login'])
     }
   }

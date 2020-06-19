@@ -4,12 +4,16 @@ import {Injectable} from "@angular/core";
 import {SchedulerService} from "../scheduler/scheduler.service";
 import {exhaustMap, take} from "rxjs/operators";
 import {User} from "./authenticate.model";
+import {environment} from "../../environments/environment";
+
 
 
 @Injectable()
 export class interceptor implements HttpInterceptor {
 
   user: User;
+  // url : string = 'http://localhost:7080/scheduler/';
+
 
   constructor(private _service: SchedulerService) {
   }
@@ -21,12 +25,15 @@ export class interceptor implements HttpInterceptor {
       this.user = user;
     });
     if (this.user) {
-      // console.log(this.user);
-      const modifiedreq = req.clone({params: req.params.set("Authorization", this.user.token)});
+
+
+      const modifiedreq = req.clone({params: req.params.set("Authorization", this.user.token),url:environment.serverUrl+req.url});
 
       return next.handle(modifiedreq);
     } else {
-      return next.handle(req);
+
+      const modifiedreq = req.clone({url:environment.serverUrl+req.url})
+      return next.handle(modifiedreq);
     }
 
 
