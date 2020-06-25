@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
+@DisallowConcurrentExecution
 public class SimpleJob extends QuartzJobBean implements InterruptableJob {
 
     JobExecutionContext jobExecutionContext_;

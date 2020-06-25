@@ -6,11 +6,7 @@ import java.lang.reflect.Method;
 import com.fhir.scheduler.entity.Available_jobs;
 import com.fhir.scheduler.repo.Jobs_repo;
 import com.fhir.scheduler.util.JobResponseCode;
-import org.quartz.InterruptableJob;
-import org.quartz.JobDataMap;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-import org.quartz.UnableToInterruptJobException;
+import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.quartz.QuartzJobBean;
@@ -20,7 +16,7 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-
+@DisallowConcurrentExecution
 public class CronJob extends QuartzJobBean implements InterruptableJob{
 
 	JobExecutionContext jobExecutionContext_;
